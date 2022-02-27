@@ -46,7 +46,9 @@ README = os.path.join(os.path.dirname(__file__), 'README.md')
 if sys.platform in ('cygwin', 'win32'):  # windows
     # note: `/FI` means forced include in VC++/VC
     # note: may be obsoleted in future if ImGui gets patched
-    os_specific_flags = ['/FIpy_imconfig.h']
+    os_specific_flags = ['/FIpy_imconfig.h',
+    #'D:\\Download\\vcpkg\\installed\\x64-windows\\lib\\freetype.lib',
+    '-ID:\\Download\\vcpkg\\installed\\x64-windows\\include']
     # placeholder for future
     os_specific_macros = []
 else:  # OS X and Linux
@@ -79,6 +81,7 @@ def extension_sources(path):
         #       a plain C++ sdist without Cython we need to explicitly mark
         #       these files for compilation and linking.
         sources += [
+            'misc/freetype/imgui_freetype.cpp'
             'imgui-cpp/imgui.cpp',
             'imgui-cpp/imgui_draw.cpp',
             'imgui-cpp/imgui_demo.cpp',
@@ -120,7 +123,9 @@ EXTRAS_REQUIRE['full'] = list(set(chain(*EXTRAS_REQUIRE.values())))
 EXTENSIONS = [
     Extension(
         "imgui.core", extension_sources("imgui/core"),
+        #extra_link_args=["/IMPLIB:D:\\Download\\vcpkg\\installed\\x64-windows\\lib\\freetype.lib"],
         extra_compile_args=os_specific_flags,
+        
         define_macros=[
             # note: for raising custom exceptions directly in ImGui code
             ('PYIMGUI_CUSTOM_EXCEPTION', None)
@@ -129,7 +134,9 @@ EXTENSIONS = [
     ),
     Extension(
         "imgui.internal", extension_sources("imgui/internal"),
+        extra_link_args=[],
         extra_compile_args=os_specific_flags,
+        
         define_macros=[
             # note: for raising custom exceptions directly in ImGui code
             ('PYIMGUI_CUSTOM_EXCEPTION', None)

@@ -9,6 +9,7 @@
  */
 
 #pragma once
+#define IMGUI_ENABLE_FREETYPE
 
 extern "C" {
 #include <Python.h>

@@ -2344,3 +2344,9 @@ cdef extern from "imgui.h" namespace "ImGui":
     ImGuiViewport* FindViewportByID(ImGuiID id) except + # ✓
     ImGuiViewport* FindViewportByPlatformHandle(void* platform_handle) except + # ✓
     
+
+
+
+cdef extern from "misc/freetype/imgui_freetype.h" namespace "ImGuiFreeType":
+        ctypedef struct ImFontBuilderIO
+        const ImFontBuilderIO* GetBuilderForFreeType()

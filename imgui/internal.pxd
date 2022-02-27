@@ -20,6 +20,7 @@ cdef extern from "imgui_internal.h":
     
     # ====
     # Forward declarations
+    ctypedef struct ImFontBuilderIO
     ctypedef struct ImBitVector
     ctypedef struct ImRect
     ctypedef struct ImDrawDataBuilder
